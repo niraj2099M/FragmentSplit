@@ -1,0 +1,46 @@
+{% extends 'fragments/base.html' %}
+{% block title %} Undo {% endblock title %}
+
+
+{% block body %}
+
+<h2 style="margin-bottom: 20px; color: red;">This page deletes the session data !! Use only to delete incorrect session data.</h2>
+
+<div class="c" style="width: 800px;">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Session</th>
+        <th scope="col">Fragments</th>
+        <th scope="col">Wz Collected(mill)</th>
+        <th scope="col">No of players</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">{{ d.dateSession }}</td>
+        <td>{{ d.time_of_day }}</td>
+        <td>{{ d.noFrag }}</td>
+        <td>{{ d.wzCollected }}</td>
+        <td>{{ d.noPlayers }}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+  <h3 style="margin-top: 30px;">List of players present:</h3>
+  <ul class="list-group">
+    {% for p in players %}
+    <li class="list-group-item">{{ p.name }}</li>
+    {% endfor %}
+  </ul>
+
+<div class="b" style="margin-left: 20px; margin-top: 20px;">
+  <a class="btn btn-outline-danger" href="{% url 'undosess' d.id %}" role="button">Confirm Undo</a>
+  <a class="btn btn-outline-secondary" href="{% url 'sessionD' %}" role="button" style="margin-left: 20px;">Cancel</a>
+</div>
+</div>
+
+{% endblock body %}

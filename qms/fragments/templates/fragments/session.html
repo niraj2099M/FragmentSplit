@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Session</title>
+</head>
+
+<body>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'show' %}">Dash board</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'session' %}">Session</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'sessionD' %}">Session Data</a>
+        </li>
+        <li class="nav-item" >
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a> 
+        </li>
+
+
+
+        <div class="secbox" style="display: flex; flex-direction: column; ">
+
+            <div class="discl" style="margin-top: 40px; width: 700px; margin-left: -280px;">
+        
+                <h4>Note: </h4>
+        
+                <ul>
+                    <li>Wz is in mill >> convert bill by multiplying by 1000 eg 1.2b = 1.2 x 1000 = 1200 mill</li>
+                    <li>Both fragments and wz collected should be an Integer input >= 0
+                    </li>
+                    <li>Integer means 0,1,2,3,4... ie no decimal/point numbers</li>
+                    <li>If no players selected ie No of players is 0 and form is submitted, there wont be any change
+                        in
+                        player's database as shown in Dashboard !</li>
+                </ul>
+            </div>
+
+
+
+            <div class="container mt-5" style="width: 250px;  margin-left: -280px; ">
+                <form action="{% url 'session' %}" method="POST">
+
+                    <div class="form-group">
+                        <label for="dateInput"
+                            style="font-family: Arial, Helvetica, sans-serif; font-weight: 500; ">Select
+                            Date: </label>
+                        <input type="date" class="form-control" id="dateInput" name="selectedDate" required>
+                    </div>
+
+                    <h5 style="margin-top: 5px; font-family: Arial, Helvetica, sans-serif; ">Session: </h5>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="Morning"
+                            id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Morning Fort
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="Night"
+                            id="flexRadioDefault2" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Night Fort
+                        </label>
+                    </div>
+
+
+                    <div class="container mt-5" style="margin-left: -15px; ">
+                        <div class="form-group">
+                            <label for="integerInput">Fragments collected:</label>
+                            <input type="number" class="form-control" id="integerInput" name="integerValue" min="0"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="decimalInput">Wz collected(in mill):</label>
+                            <input type="number" class="form-control" id="integerInput" name="wzValue" min="0" required>
+                        </div>
+                    </div>
+
+
+
+
+                    <h5 style="margin-top: 15px; font-family: Arial, Helvetica, sans-serif; ">Players Present: </h5>
+
+
+                    {% for player in data %}
+
+
+                    <div class="form-check form-check-lg">
+                        <input class="form-check-input" type="checkbox" name="options[]" value="{{ player.id }}"
+                            id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{ player.name }}
+                        </label>
+                    </div>
+                    {% endfor %}
+
+                    <p id="checkboxCount">Number of players: 0</p>
+
+
+
+
+                    <button type="submit" class="btn btn-primary"
+                        style="margin-top: 10px; margin-bottom: 100px;">Submit</button>
+                </form>
+            </div>
+
+
+
+        </div>
+        </div>
+
+
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Get all checkboxes
+                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+                // Get the element to display the count
+                var checkboxCountElement = document.getElementById('checkboxCount');
+
+                // Function to update the count
+                function updateCheckboxCount() {
+                    var checkedCount = 0;
+                    checkboxes.forEach(function (checkbox) {
+                        if (checkbox.checked) {
+                            checkedCount++;
+                        }
+                    });
+                    checkboxCountElement.textContent = 'Number of players: ' + checkedCount;
+                }
+
+                // Add event listener to each checkbox
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.addEventListener('change', updateCheckboxCount);
+                });
+            });
+        </script>
+
+
+</body>
+
+</html>

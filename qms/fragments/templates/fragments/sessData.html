@@ -1,0 +1,63 @@
+{% extends 'fragments/base.html' %}
+{% block title %} Session Data {% endblock title %}
+
+
+{% block body %}
+
+
+
+
+
+    <div class="container-table"
+        style="margin-top: 50px; margin-left: 10px; margin-right: 10px;  border: solid; width: 800px;">
+
+        <table class="table">
+            <h2>Session Data(last 10)</h2>
+
+            {% if sessD|length == 0 %}
+            <div class="alert alert-secondary" role="alert">
+                No records found!
+            </div>
+
+
+
+            {% else %}
+
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Session</th>
+                    <th scope="col">Fragments</th>
+                    <th scope="col">Wz Collected(mill)</th>
+                    <th scope="col">No of players</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                {% for d in sessD %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ d.dateSession }}</td>
+                    <td>{{ d.time_of_day }}</td>
+                    <td>{{ d.noFrag }}</td>
+                    <td>{{ d.wzCollected }}</td>
+                    <td>{{ d.noPlayers }}</td>
+                    <td><a href="{% url 'undo' d.id %}" type="button" class="btn btn-outline-danger"
+                            style="margin-left: -7px;">Undo</button></td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+            {% endif %}
+
+        </table>
+
+    </div>
+</div>
+
+
+{% endblock body %}

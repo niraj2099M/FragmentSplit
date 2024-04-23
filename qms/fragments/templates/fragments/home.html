@@ -1,0 +1,79 @@
+{% extends 'fragments/base.html' %}
+{% block title %} Player's Data{% endblock title %}
+
+
+{% block body %}
+ 
+
+<div class="container" style="width: 500px; margin-left: 10px; margin-top: 20px;">
+  <form id="myForm" action="{% url 'show' %}" method="POST"> {% csrf_token %}
+    
+    <div class="mb-3">
+      <label for="titleOfTask" class="form-label">Add Player</label>
+      <input type="text" class="form-control" id="titleOfTask" name="name" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+
+</div>
+
+
+<div class="sum" style="margin-top: 40px; margin-left: 20px;">
+<div>Total Fragments: {{ s.0 }}</div>
+<div>Total Wz(mill): {{ s.1 }}</div>
+</div>
+
+
+
+<div class="container-table" style="margin-top: 50px; margin-left: 10px; margin-right: 10px;">
+
+  <table class="table">
+    <h2>Player's Data (To delete a player contact MADARA :P)</h2>
+
+    {% if data|length == 0 %}
+    <div class="alert alert-secondary" role="alert">
+      No records found!
+    </div>
+
+
+
+    {% else %}
+
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Player Name</th>
+        <th scope="col">Fragments</th>
+        <th scope="col">Wz (in millions)</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+      {% for d in data %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ d.name }}</td>
+        <td>{{ d.fragNo }}</td>
+        <td>{{ d.wz }}</td>
+        <td><a href="{% url 'update' d.id %}" type="button" class="btn btn-outline-success" style="margin-left: -7px;">Pay out</button>
+
+        </td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+    {% endif %}
+
+  </table>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+{% endblock body %}

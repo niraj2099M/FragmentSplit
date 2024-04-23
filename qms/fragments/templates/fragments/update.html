@@ -1,0 +1,91 @@
+{% extends 'fragments/base.html' %}
+{% block title %}Update{% endblock title %}
+
+{% block body %}
+
+<div class="info" style="width: 500px; margin-top: 20px;">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Player Name</th>
+        <th scope="col">Fragments</th>
+        <th scope="col">Wz(mill)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ pd.name }}</td>
+        <td>{{ pd.fragNo }}</td>
+        <td>{{ pd.wz }}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+
+  <div class="container">
+    <form action="{% url 'update' pd.id %}" method="POST">
+      <div class="mb-3">
+        <label for="titleOfTask" class="form-label">Fragments Payment:</label>
+        <input type="number" class="form-control" id="titleOfTask" name="fpay" min="0" step="0.01" max="{{ pd.fragNo }}" required>
+      </div>
+      <div class="mb-3">
+        <label for="WorkDescription" class="form-label">Wz Payment(integer in mill):</label>
+        <input type="number" class="form-control" id="WorkDescription" name="wzpay" min="0" max="{{ pd.wz }}" required>
+      </div>
+
+      <button type="submit" class="btn btn-success">Pay Out</button>
+    </form>
+
+  </div>
+</div>
+
+
+<div class="tab" style="margin-top: 40px;">
+  
+<table class="table">
+
+    <h2>Payout Data:</h2>
+
+    {% if payd|length == 0 %}
+    <div class="alert alert-secondary" role="alert">
+      No records found!
+    </div>
+
+
+
+    {% else %}
+
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date Paid</th>
+        <th scope="col">Frags Paid</th>
+        <th scope="col">Wz Paid(mill)</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+      {% for d in payd %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ d.name }}</td>
+        <td>{{ d.current_datetime_ist }}</td>
+        <td>{{ d.fragsPaid }}</td>
+        <td>{{ d.wzPaid }}</td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+    {% endif %}
+
+  </table>
+</div>
+
+
+
+{% endblock body %}
