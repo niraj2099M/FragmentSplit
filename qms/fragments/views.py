@@ -27,16 +27,16 @@ def log(request):
     return render(request,'fragments/login.html',{})
 
 
-def list_all(request):
-
-    allData=players.objects.all()
-    return render(request,'fragments/list.html',{"data":allData})
-
-
 def log_out(request):
 
     auth.logout(request)
     return redirect('loginpage')
+
+
+def list_all(request):
+
+    allData=players.objects.all()
+    return render(request,'fragments/list.html',{"data":allData})
 
 
 @login_required(login_url='loginpage')
@@ -59,9 +59,6 @@ def show(request):
                 return render(request, 'fragments/error.html',{"name":name})            
         else:
             return redirect('show')
-
-
-
     
     allData=players.objects.all()
 
@@ -136,6 +133,8 @@ def session_data(request):
     allsession=sess.objects.all().order_by('-id')[:10]
     return render(request, 'fragments/sessData.html',{"sessD":allsession })
 
+
+
 @login_required(login_url='loginpage')
 def undo_session(request,id):
 
@@ -168,7 +167,6 @@ def undo_session_confim(request,id):
     fp=frags/no
     wzp=wz/no
 
-
     ids=sessionD.player_ids
 
     lstIds=ids.split(",")
@@ -187,12 +185,6 @@ def undo_session_confim(request,id):
 
 
     return redirect('sessionD')
-
-
-
-
-
-
 
 
 
@@ -221,10 +213,6 @@ def updateData(request,id):
                 wzPaid=int(wz)
             )
             payout.save()
-
-
-        
-      
 
     playerData = players.objects.get(id=id)
     payoutD=payoutData.objects.all().order_by('-id')[:40]
