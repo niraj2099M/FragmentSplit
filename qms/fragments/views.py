@@ -58,7 +58,7 @@ def show(request):
             except:
                 return render(request, 'fragments/error.html',{"name":name})            
         else:
-            return redirect('show')
+            return render(request, 'fragments/error_invalid_name.html',{"name":name})
     
     allData=players.objects.all()
 
