@@ -37,17 +37,16 @@ A3 Resource Management, a dynamic web application designed to streamline resourc
 gh repo clone niraj2099M/A3-Resource-Management
 ```
 ### After that, you need to open the project in your IDE and run it.
-`cd qms`
+        cd qms
 
 
 
 - ## Command to perform migrations
-`python3 manage.py makemigrations`
-
-`python3 manage.py migrate`
+        python3 manage.py makemigrations
+        python3 manage.py migrate
 
 - ## Command to run server
-`python3 manage.py runserver`
+        python3 manage.py runserver
 
 
 - ## Login credentials
