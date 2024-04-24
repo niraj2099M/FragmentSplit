@@ -50,7 +50,9 @@ gh repo clone niraj2099M/A3-Resource-Management
 `python3 manage.py runserver`
 
 
-
+- ## Login credentials
+        Username: test
+        Password: niraj1726
 
 
 
