@@ -6,19 +6,19 @@ A3 Resource Management, a dynamic web application designed to streamline resourc
 
 <hr>
 
-- Home page:
+- **Home page**:
 
 ![Home page](qms/assets/loginpage.png)
 
-- Dashboard:
+- **Dashboard**:
 
 ![Dashboard](qms/assets/addPayput.png)
 
-- Payout:
+- **Payout**:
 
 ![Payout page](qms/assets/payoutData.png)
 
-- Session data:
+- **Session data**:
 
 ![Session page](qms/assets/sessData.png)
 
