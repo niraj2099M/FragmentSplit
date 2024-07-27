@@ -34,7 +34,7 @@ A3 Resource Management, a dynamic web application designed to streamline resourc
 ## `Installing`
 ```bash
 # downloading the project
-gh repo clone niraj2099M/A3-Resource-Management
+gh repo clone niraj2099M/FragmentSplit
 ```
 ### After that, you need to open the project in your IDE and run it.
         cd qms
